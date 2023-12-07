@@ -12,17 +12,19 @@ def shortest_shortest_path(graph, source):
       a dict where each key is a vertex and the value is a tuple of
       (shortest path weight, shortest path number of edges). See test case for example.
     """
-    ### TODO
-    distances = {vertex: [float('inf'), float('inf')] for vertex in graph}
+    ### TODO initalize each vertex of the graph 
+    distances = {vertex: [float('inf'), float('inf')] for vertex in graph} #taking in the varibles of distance 
     distances[source] = [0, 0]
     min_heap = [(0, 0, source)]  # (distance, number of edges, vertex)
-    
+       
+# Dijkstra's algorithm
+
     while min_heap:
-        curr_dist, curr_edges, curr_vertex = heapq.heappop(min_heap)
-        
+        curr_dist, curr_edges, curr_vertex = heapq.heappop(min_heap) #this is 
+                # If  stored distance is smaller than the current distance,  next iteration
         if [curr_dist, curr_edges] > distances[curr_vertex]:
             continue
-        
+        #looks at neigboring vetext 
         for neighbor, weight in graph[curr_vertex]:
             new_dist = curr_dist + weight
             new_edges = curr_edges + 1
@@ -49,15 +51,16 @@ def bfs_path(graph, source):
     queue = deque([source])
     visited[source] = True
 
-    while queue:
+    while queue: # Dequeue the current vertex
         current_vertex = queue.popleft()
+        # Explore neighbors of the current 
 
         for neighbor in graph[current_vertex]:
-            if not visited[neighbor] and neighbor != source:
+            if not visited[neighbor] and neighbor != source: #mark as visited 
                 visited[neighbor] = True
                 queue.append(neighbor)
                 parent[neighbor] = current_vertex
-
+# Return the dictionary that has  each vertex's parent in the shortest path tree is stored
     return parent
 
 
@@ -78,10 +81,12 @@ def get_path(parents, destination):
       (excluding the destination node itself). See test_get_path for an example.
     """
     ###TODO
-    path = []
+    path = [] #makes empty list for path 
     while destination is not None:
-        path.append(destination)
+        path.append(destination) #go through parent nodes 
         destination = parents[destination]
-    return list(reversed(path[:-1])) if path else None
+    return list(reversed(path[:-1])) #return swapped lsit
+       if path else 
+       None
 
 
